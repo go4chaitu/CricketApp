@@ -1,0 +1,74 @@
+	.player_li {
+    display: block;
+	background-color: black;
+	}	
+
+	ul {
+    background-color: rgba(20, 10, 10, 0.76);
+    width: 200px;
+	}
+	.player_label {
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    font-weight: 500;
+	}
+	.player_img:hover{
+		cursor: pointer;	
+		height:112px;	
+		width:112px;
+		margin: 5px;	
+	}
+	.player_img{
+		height:110px;	
+		width:110px;
+		margin: 5px;	
+	}	
+	#autosuggest_col {
+		float: right;		
+	}
+	#choosen_players {
+		float: left;
+		display: block;		
+		width:800px;
+		height: auto;		
+		margin-top: 120px;
+		margin-left: 120px;
+
+	}
+	.player_img_content {
+		height:120px;
+		width:120px;
+		margin: 5px;
+	}
+	body{
+
+		background-color: black;
+	}
+	.default_autosuggest_cols {
+		float:right;
+		position: relative;
+		right: -4%;
+		
+	}
+	.player_box {
+		float:left;
+		width:120px;
+		height:120px;
+		margin-right: 5px;
+		margin-top: 10px;
+		background-image:url('images/close.gif');		
+	}
+	.playerbox_close {
+		display: block;
+	}
+	.playerbox_close img {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    top: -130px;
+    right: -100px;
+	}
+	.playerbox_close img:hover {
+    cursor: pointer;
+	}

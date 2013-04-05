@@ -1,0 +1,161 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Autocomplete - Custom data and display</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="mycss.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+ 
+  <script>
+  $(function() {
+    var current_team_count = 0;
+
+    var projects = [
+      {
+        value: "Johan Botha",
+        label: "Johan Botha",
+        desc: "Johan Botha",
+        icon: "Johan_Botha.jpg",
+		url: "#"
+      },
+      {
+        value: "JMichael	Clarke",
+        label: "JMichael	Clarke",
+        desc: "Michael	Clarke",
+        icon: "Michael_Clarke.jpg",
+		url: "#"
+      },
+      {
+        value: "Ricky	Ponting",
+        label: "Ricky	Ponting",
+        desc: "Ricky	Ponting",
+        icon: "RickyPonting.jpg",
+		url: "#"
+      }
+    ];
+ 
+
+    var selectFunc = function(label, icon){
+        addPlayer(label, icon); 
+        return false;
+    }
+    $( "#autosuggest_col" ).autocomplete({
+      minLength: 0,
+      source: projects,
+      focus: function( event, ui ) {
+        $( "#autosuggest_col" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+        addPlayer(ui.item.label, ui.item.icon); 
+        return false;
+      }
+    })
+    .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+      return $( "<li class=\"player_li\">" )		
+		.append( "<div class=\"player_label\">"+item.label+"</div><div><a><img class=\"player_img\" src=\"images/"+item.icon+"\"/></a></div>")	
+        .appendTo( ul );
+    };
+	
+	 // Overrides the default autocomplete filter function to search only from the beginning of the string
+    $.ui.autocomplete.filter = function (array, term) {
+        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+        return $.grep(array, function (value) {
+            return matcher.test(value.label);
+        });
+    };
+
+    $(".player_li").click( function(){
+        current_team_count ++;
+        var selectedSrc = $(this).find('img').attr('src');
+        $('#player'+current_team_count).attr("src", selectedSrc );
+    });
+    var addPlayer = function( label, icon_param ){
+      if( current_team_count < 11 )
+      {
+        current_team_count ++;
+        var $tmp_img = $('<img class="player_img_content" src="images/'+icon_param+'"/>');      
+        //$('#choosen_players').append( $tmp_img );
+        $('#player'+current_team_count).attr("src","images/"+icon_param);
+      }
+      else
+      {
+        alert("You have already choosen all the players. Now you can only replace the players...");
+      }
+    }
+  });
+
+ $(".playerbox_close img").click( function() {
+  
+ });
+  </script>
+</head>
+<body>
+<div id="choosen_players">
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player1" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><a><img src="images/close.jpg"/></a></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player2" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><img src="images/close.jpg"/></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player3" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><img src="images/close.jpg"/></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player4" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><img src="images/close.jpg"/></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player5" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><a><img src="images/close.jpg"/></a></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player6" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><a><img src="images/close.jpg"/></a></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player7" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><a><img src="images/close.jpg"/></a></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player8" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><img src="images/close.jpg"/></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player9" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><img src="images/close.jpg"/></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player10" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><a><img src="images/close.jpg"/></a></li>    
+  </ul>
+  <ul class="player_box">
+    <li><img class="player_img_content" id="player11" src="images/dummy.jpg"/></li>
+    <li class="playerbox_close"><a><img src="images/close.jpg"/></a></li>    
+  </ul>  
+</div>
+<input id="autosuggest_col"/>
+<div class="default_autosuggest_cols">
+  <ul>
+    <li class="player_li ui-menu-item" role="presentation">
+
+      <div class="player_label">Johan Botha</div>
+      <div id="personimg"><a><img class="player_img" src="images/Johan_Botha.jpg"></a></div>
+    </li>
+
+    <li class="player_li ui-menu-item" role="presentation">
+      <div class="player_label">JMichael  Clarke</div>
+      <div><a><img class="player_img" src="images/Michael_Clarke.jpg"></a></div>
+    </li>
+  </ul>
+</div>
+<input type="hidden" id="project-id" />
+<p id="project-description"></p>
+ 
+ 
+</body>
+</html>
